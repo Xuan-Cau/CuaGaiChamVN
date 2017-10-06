@@ -78,4 +78,6 @@ def bmi_calc():
 def hello():
     return redirect("http://techkids.vn/")
 
-app.run (debug = True)
+
+if __name__ == "__main__":
+	app.run (debug = True)

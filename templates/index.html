@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Cưa Gái Đại Cương </title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/index.css">
 
@@ -13,23 +13,18 @@
   </head>
   <body>
 
-    <h1  id = "blue_tag" class="text-success jumbotron display-3 d-none d-sm-block">Đại Cương Cưa Gái</h1>
-    <h4 class="text-primary d-md-none ">Đại Cương Cưa Gái</h4>
 
-      <!-- <table>
-          <tr>
-              <th><a href="http://techkids.vn/"><img src="http://via.placeholder.com/400x200"  width="106" height="142" ></a></th>
-              <th><a href="http://techkids.vn/"><img src="http://via.placeholder.com/400x200"  width="106" height="142" ></a></th>
-          </tr>
-          <tr>
-                <td>em yeu 1</td>
-                <td>em yeu 1</td>
-          </tr>
-      </table>
-          <a href="http://techkids.vn/"><img src="http://via.placeholder.com/400x200"  width="106" height="142" ></a> -->
+  <h1  id = "blue_tag" class="text-success jumbotron display-3 d-none d-sm-block">Where Do You Want To Go ?</h1>
+
+<div class="card-footer clearfix ">
+  <input type="submit" class=" float-right" value="Tìm kiếm">
+  <input type="text" class=" float-right" placeholder=" Gõ từ khóa tìm kiếm ">
+
+</div>
+
 
           <div class="container">
-            <div class="row">
+            <div class="row ">
 
               {% for girl_type in girl_types %}
               <div class="col-md-4 col-sm-6 m*-4">
@@ -43,8 +38,7 @@
                   </div>
                   <div class="card-footer">
                     <div class="clearfix">
-                      <a href="#" class="btn btn-primary ">Chi tiết</a>
-                      <button class="btn btn-primary float-right" >asd</button>
+                      <a target="_blank" href=" {{ girl_type["detailX"] }} " class="btn btn-primary float-right">Chi tiết</a>
                     </div>
                   </div>
                 </div>

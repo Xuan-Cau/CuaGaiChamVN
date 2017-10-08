@@ -8,7 +8,6 @@ flask-mongoengine
 flask-redis
 Pillow
 flask-socketio
-beautifulsoup4
 
 # ----------------------
 # Testing
@@ -19,7 +18,7 @@ mock
 # ----------------------
 # Production Server
 # ----------------------
-eventlet
+gevent
 gunicorn
 mongoengine
 
@@ -27,4 +26,4 @@ mongoengine
 # Other
 # ----------------------
 youtube-dl
-addict
+flake8

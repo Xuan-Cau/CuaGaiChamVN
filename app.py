@@ -1,19 +1,21 @@
 import os
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, redirect,url_for
 import mlab
 from mongoengine import Document, StringField, IntField
-
+from werkzeug.utils import secure_filename
 mlab.connect()
+
+UPLOAD_FOLDER = '/path/to/the/uploads'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 class GirlType(Document):
     name = StringField()
     image = StringField()
     description = StringField()
+    detailX = StringField()
 
-girl_types = GirlType(  name = "Gái tiểu thư",
-                        image = "http://via.placeholder.com/400x200",
-                        description = "Thường đến các nơi sang chảnh như : royal tea,... thích chỗ sạch sẽ, thích con trai chất chơi")
-# girl_types.save()
+
+#girl_types.save()
 # 1. connect to mlap (x)
 # 2. app some data
 # 3. Get data for render_template
@@ -21,29 +23,7 @@ girl_types = GirlType(  name = "Gái tiểu thư",
 
 app = Flask (__name__)
 
-g_type = [{
-        "type" : "Gái tiểu thư ",
-        "image" : "http://via.placeholder.com/400x200",
-        "description" : "Thường đến các nơi sang chảnh như : royal tea,... thích chỗ sạch sẽ, thích con trai chất chơi."
-    },
-    {
-        "type" : "Gái ngoan ",
-        "image" : "http://via.placeholder.com/400x200",
-        "description" : " tính bình dân , ăn mặc trẻ như học sinh, già như công sở, chăm học, cẩn thân, hay xuất hiện ở thư viện: L'espace , ... "
-    },
-    {
-        "type" : "Gái hư ",
-        "image" : "http://via.placeholder.com/400x200",
-        "description" : "Nhìn là biết"
-    }
-]
-
-#app.config ["DEBUG"] = True
-
-class GirlType(Document):
-    name = StringField()
-    image = StringField()
-    description = StringField()
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route ('/')
 def index ():
@@ -70,14 +50,31 @@ def bmi():
 def bmi_calc():
     return render_template("bmi_calc.html")
 
+@app.route("/chi-tiet-1")
+def chitiet():
+    return render_template("chi-tiet-1.html")
+
 #@app.route("/use/<name>/")
 #def fnam(name):
 #    return "<h3> hello {0} </h3>".format (name)
-
-@app.route('/shool')
+#https://www.w3schools.com/
+#froute
+@app.route('/admin')
 def hello():
-    return redirect("http://techkids.vn/")
+    return render_template("admin.html",girl_types=GirlType.objects())
+
+@app.route ('/delete_girl_type/<girl_id>')
+def delete_girl_type(girl_id):
+    #1. Delete girl type from database
+    girl_type = GirlType.objects().with_id(girl_id)
+    if girl_type is not None:
+        #Fount it
+        girl_type.delete()
+
+    #2. Come back to admin
+    return redirect("/admin")
+
 
 
 if __name__ == "__main__":
-	app.run (debug = True)
+    app.run (debug = True)

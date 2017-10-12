@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<div class="container">
+  <form class="" action="index.html" method="post">
+
+    <input type="text" class="form-control mb-2" name="" value="{{ girl_type.name }}">
+
+<div class="form-group">
+    <label for="" class="d-block">Ảnh</label>
+    <img class="mb-3" src="{{ girl_type.image }}" alt="{{ girl_type.name }}">
+    <input  class="form-control mb-2" placeholder="Link đâu phun ra !!"  name="" value="">
+</div>
+
+    <label for="">Mô Tả</label>
+    <textarea class="form-control mb-2" name="name" rows="10" cols="100">{{ girl_type.description }}</textarea>
+
+    <button type="btn btn-primary" name="submit"> Cập Nhật </button>
+
+  </form>
+</div>
+
+{% endblock %}

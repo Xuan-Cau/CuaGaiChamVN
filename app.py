@@ -1,19 +1,13 @@
 import os
-from flask import Flask, render_template, redirect, request, redirect,url_for
+from flask import Flask, render_template, redirect, request, redirect
 import mlab
 from mongoengine import Document, StringField, IntField
-from werkzeug.utils import secure_filename
+from models.girl_type import GirlType,dump_data
 mlab.connect()
 
-UPLOAD_FOLDER = '/path/to/the/uploads'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+#import feedparser
 
-class GirlType(Document):
-    name = StringField()
-    image = StringField()
-    description = StringField()
-    detailX = StringField()
-
+#dump_data()
 
 #girl_types.save()
 # 1. connect to mlap (x)
@@ -23,41 +17,30 @@ class GirlType(Document):
 
 app = Flask (__name__)
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route ('/')
 def index ():
     return render_template ('index.html',girl_types = GirlType.objects())
 
-@app.route("/about")
-def about():
-    return "About this page"
+# @ app.route ("/")
+# def get_news ():
+#          feed = feedparser.parse (RSS_FEEDS [publication])
+
+
+@app.route("/girl_type/<girl_id>")
+def girl_type_detail(girl_id):
+
+    girl_type = GirlType.objects().with_id(girl_id)
+
+    if girl_type is not None:
+        return render_template("girl_type_detail.html", girl_type=girl_type)
+    else :
+        return "<h4> khong thay  </h4>"
 
 # http://127.0.0.1:5000/bmi?height=175&weight=70
 
-@app.route("/bmi")
-def bmi():
-    print (request.args)
-    args = request.args
-    weight = int( args["weight"])
-    height = int(args["height"]) / 100
-    bmi = weight / (height ** 2)
-
-    return str(bmi)
 
 
-@app.route("/bmi-calc")
-def bmi_calc():
-    return render_template("bmi_calc.html")
-
-@app.route("/chi-tiet-1")
-def chitiet():
-    return render_template("chi-tiet-1.html")
-
-#@app.route("/use/<name>/")
-#def fnam(name):
-#    return "<h3> hello {0} </h3>".format (name)
-#https://www.w3schools.com/
 #froute
 @app.route('/admin')
 def hello():
@@ -74,6 +57,12 @@ def delete_girl_type(girl_id):
     #2. Come back to admin
     return redirect("/admin")
 
+@app.route('/edit_girl_type/edit/<girl_id>')
+def edit_girl_type(girl_id):
+    girl_type = GirlType.objects().with_id(girl_id)
+    if girl_type is not None:
+        return render_template ("girl_type_edit.html", girl_type = girl_type)
+    return " Loại nè đã tiệt chủng ;) "
 
 
 if __name__ == "__main__":

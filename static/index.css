@@ -1,3 +1,7 @@
+.{margin: 10px}
+body {font-family: Arial; color: #000; font-size: 16px}
+
+
 .card-girl-type{
   min-height: 500px !important;
 }

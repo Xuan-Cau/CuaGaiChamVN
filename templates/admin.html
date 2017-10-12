@@ -24,11 +24,12 @@
           <a target="_blank" href="{{ girl_type.image }}">xem anh </a>
         </td>
         <td>
-          <a href="/delete_girl_type/{{ girl_type.id }} "  class="row">
+          
+          <a href="{{ url_for('edit_girl_type', girl_id = girl_type.id )  }} "  class="row">
           <i class="fa fa-pencil" aria-hidden="true"></i>
         </a>
 
-        <a href="/delete_girl_type/{{ girl_type.id }}" class="row">
+          <a href="/delete_girl_type/{{ girl_type.id }}" class="row">
           <i class="fa fa-trash" aria-hidden="true"></i>
         </a>
         </td>

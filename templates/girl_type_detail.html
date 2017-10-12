@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+
+{% block page_content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> {{ girl_type.name }} </title>
+    <style media="screen">
+      div.relative {
+        position: relative  ;
+        left: 50px;
+        width: 1200px;
+        height: 100px;
+        border: 4px solid #73AD21;
+      }
+      div.absolute {
+        position: absolute;
+        top: 150px;
+        right: 400px;
+        width: 400px;
+        height: 300px;
+
+}
+p {
+    font-size: 140%;
+}
+.div1 {
+    width: 400px;
+    height: 500px;
+    border: 1px solid blue;
+  }
+    </style>
+  </head>
+  <body>
+    <div class="relative " style="color:#B404AE" >
+      <h1> {{ girl_type.name }} </h1>
+    </div>
+
+
+<div class="card-body ">
+  <div class="container ">
+    <div class="row">
+      <div class="">
+        <div class="col-md-12 div1">
+          <ul>
+            <li><font color="CadetBlue"><p>{{ girl_type.description }}</p></font></li>
+          </ul>
+        </div>
+        <div class="absolute col-md-4 col-sm-6 m*-4">
+          <img height="400" width="600" src=" {{ girl_type.image }} " alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  </body>
+</html>
+
+{% endblock %}
